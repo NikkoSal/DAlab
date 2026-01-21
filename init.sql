@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS taxi;
+USE taxi;
+
+CREATE TABLE IF NOT EXISTS rides (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    timestamp DATETIME NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    from_zone VARCHAR(50) NOT NULL,
+    to_zone VARCHAR(50) NOT NULL,
+    distance_km DECIMAL(5,2) NOT NULL,
+    price DECIMAL(7,2) NOT NULL,
+    rating TINYINT NOT NULL
+);

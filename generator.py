@@ -28,7 +28,7 @@ def generate_ride():
 
 def main():
     connection = mysql.connector.connect(
-        host='localhost',
+        host='mysql',
         port=3306,
         user='root',
         password='1111',
