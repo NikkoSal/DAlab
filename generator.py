@@ -4,7 +4,7 @@ from datetime import datetime
 import mysql.connector
 
 cities = ["Москва", "Санкт-Петербург", "Владивосток", "Волгоград"]
-zones = ["Центр", "Спальный район", "Аэропорт", "Вокзал", "Бизнес-квартал"]
+zones = ["Центр", "Стройка", "Аэропорт", "Вокзал", "Больница", "Автомойка", "Ресторан", "Сопка"]
 
 def generate_ride():
     city = random.choice(cities)
@@ -12,7 +12,7 @@ def generate_ride():
     to_zone = random.choice(zones)
     distance_km = round(random.uniform(1.0, 25.0), 2)
     price = round(distance_km * random.uniform(35, 55), 2)
-    rating = random.randint(3, 5)
+    rating = random.randint(1, 5)
 
     ride = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -31,7 +31,7 @@ def main():
         host='mysql',
         port=3306,
         user='root',
-        password='1111',
+        password='12782234',
         database='taxi'
     )
     cursor = connection.cursor()

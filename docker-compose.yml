@@ -12,18 +12,88 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - analytics_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=12782234"]
+      timeout: 20s
+      retries: 10
+      start_period: 10s
+      interval: 5s
 
   data-generator:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
+    networks:
+      - analytics_net
+
+      
+  redis:
+    image: redis:7
+    container_name: redash_redis
+    networks:
+      - analytics_net
+
+  postgres:
+    image: postgres:15
+    container_name: redash_postgres
+    environment:
+      POSTGRES_DB: redash
+      POSTGRES_USER: redash
+      POSTGRES_PASSWORD: redash
+    volumes:
+      - redash_postgres_data:/var/lib/postgresql/data
+    networks:
+      - analytics_net
+
+  redash-server:
+    image: redash/redash:10.1.0.b50633
+    container_name: redash_server
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      REDASH_DATABASE_URL: postgres://redash:redash@postgres:5432/redash
+      REDASH_REDIS_URL: redis://redis:6379/0
+      REDASH_SECRET_KEY: supersecretkey
+      REDASH_COOKIE_SECRET: 12345
+    ports:
+      - "5000:5000"
+    command: server
+    networks:
+      - analytics_net
+
+  redash-scheduler:
+    image: redash/redash:latest
+    container_name: redash_scheduler
+    depends_on:
+      - redash-server
+    environment:
+      REDASH_DATABASE_URL: postgres://redash:redash@postgres:5432/redash
+      REDASH_REDIS_URL: redis://redis:6379/0
+      REDASH_SECRET_KEY: supersecretkey
+    command: scheduler
+    networks:
+      - analytics_net
+
+  redash-worker:
+    image: redash/redash:latest
+    container_name: redash_worker
+    depends_on:
+      - redash-server
+    environment:
+      REDASH_DATABASE_URL: postgres://redash:redash@postgres:5432/redash
+      REDASH_REDIS_URL: redis://redis:6379/0
+      REDASH_SECRET_KEY: supersecretkey
+    command: worker
     networks:
       - analytics_net
 
 volumes:
   mysql_data:
+  redash_postgres_data:
 
 networks:
   analytics_net:
