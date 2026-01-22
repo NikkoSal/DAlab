@@ -19,9 +19,9 @@
 "Internal Server Error"
 The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application."
 Для ее фикса понадобилось ввести команду: -docker-compose run --rm redash-server create_db. Эта команда создаёт таблицы в PostgreSQL, без которых Redash не может работать.
-Далее я все-таки попал в интерфейс редаша и зарегестирировался. На этом этапе следующей целью было зайти в настройки и привязать мою БД. Тут я столкнулся с тем, что test connect завершался с неизвестной ошибкой и коннекста не просходило. Я в init.sql добавил инициализацию нового пользователя, дабы пофиксить ситуацию с подклчением. Так же немного прошелся по yml файлу. В конечном итоге
+Далее я все-таки попал в интерфейс редаша и зарегестрировался. На этом этапе следующей целью было зайти в настройки и привязать мою БД. Тут я столкнулся с тем, что test connect завершался с неизвестной ошибкой и коннекста не просходило. Я в init.sql добавил инициализацию нового пользователя, дабы пофиксить ситуацию с подклчением. Так же немного прошелся по yml файлу. В конечном итоге
 подключится к БД с смог только с другого браузера(google, изначально запускал в microsoft edge).
-Там я перешел в развел Queries, где сделал 3 запроса и 3 взуализации:<img width="944" height="971" alt="image" src="https://github.com/user-attachments/assets/31aa569e-bb23-4b87-945c-f46c40c8d7db" />
+Там я перешел в развел Queries, где сделал 3 запроса и 3 графика:<img width="944" height="971" alt="image" src="https://github.com/user-attachments/assets/31aa569e-bb23-4b87-945c-f46c40c8d7db" />
 1<img width="1807" height="836" alt="image" src="https://github.com/user-attachments/assets/9d76dfef-e66e-48f1-8d26-4769cba356c3" />
 <img width="1410" height="425" alt="image" src="https://github.com/user-attachments/assets/8199ab40-b970-453c-88d6-bb4456ff8f60" />
 2. <img width="1812" height="878" alt="image" src="https://github.com/user-attachments/assets/e225dc44-324f-4f85-b5a2-11f10e4db286" />
