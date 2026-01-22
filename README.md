@@ -19,8 +19,7 @@
 "Internal Server Error"
 The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application."
 Для ее фикса понадобилось ввести команду: -docker-compose run --rm redash-server create_db. Эта команда создаёт таблицы в PostgreSQL, без которых Redash не может работать.
-Далее я все-таки попал в интерфейс редаша и зарегестирировался. На этом этапе следующей целью было зайти в настройки и привязать мою БД. Тут я столкнулся с тем, что test connect не завершался с   
-неизвестной ошибкой и коннекста не просходило. Я в init.sql добавил инициализацию нового пользователя, дабы пофиксить ситуацию с подклчением. Так же немного прошелся по yml файлу. В конечном итоге
+Далее я все-таки попал в интерфейс редаша и зарегестирировался. На этом этапе следующей целью было зайти в настройки и привязать мою БД. Тут я столкнулся с тем, что test connect завершался с неизвестной ошибкой и коннекста не просходило. Я в init.sql добавил инициализацию нового пользователя, дабы пофиксить ситуацию с подклчением. Так же немного прошелся по yml файлу. В конечном итоге
 подключится к БД с смог только с другого браузера(google, изначально запускал в microsoft edge).
 Там я перешел в развел Queries, где сделал 3 запроса и 3 взуализации:<img width="944" height="971" alt="image" src="https://github.com/user-attachments/assets/31aa569e-bb23-4b87-945c-f46c40c8d7db" />
 1<img width="1807" height="836" alt="image" src="https://github.com/user-attachments/assets/9d76dfef-e66e-48f1-8d26-4769cba356c3" />
@@ -30,7 +29,7 @@ The server encountered an internal error and was unable to complete your request
 3. <img width="1823" height="880" alt="image" src="https://github.com/user-attachments/assets/addda7f5-7a62-4f78-860a-5c9d08df58d4" />
 <img width="1363" height="418" alt="image" src="https://github.com/user-attachments/assets/cb37acb4-34d3-42da-bc01-0eb1d06f95f7" />
 Далее я делаю Dashboard, куда закидывю все графики <img width="1811" height="893" alt="image" src="https://github.com/user-attachments/assets/e4c1991f-0494-4b6a-a943-078714f8734d" />
-Так как у меня данные генеряться на рандоме в одинаоквых примрено диапозонах данные на графиках примерно равны между собой.
+Так как у меня данные генеряться на рандоме в одинаковых примрено диапозонах, данные на графиках относительно равны между собой.
 
 
 
