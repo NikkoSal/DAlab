@@ -10,10 +10,10 @@
 Следующи этапом было завернуть всё в докер. Я добавил в проект Dockerfile для генератора данных, создал docker-compose с двумя сервисами
 под SQL и генератор и добавил init.sql для создания бд и таблицы. Командой -docker-compose up поднял 2 контейнера и убедился в работоспособности.
 3. Redash
-Для работоспособоности Redash мне необходимо было нкакатить сервисы Redis и Postgres. Добавлены vlumes для сохранения данных(mysql_data, redash_postgres_data)
+Для работоспособоности Redash мне необходимо было накатить сервисы Redis и Postgres. Добавлены volumes для сохранения данных(mysql_data, redash_postgres_data)
 Так же у меня redash-server, redash-worker - обработчик фоновых задач, redash-scheduler - планировщик задач.
 Еще немного изменил данные для генерации.
-Все это поднимаю командой -docker-compose up или можно через Docker desktop.
+Все это поднимаю командой -docker-compose up.Так же можно поднять через Docker desktop.
 Результат:<img width="1568" height="886" alt="image" src="https://github.com/user-attachments/assets/b7d35bb4-a7e2-4387-b47a-3b5135761255" />
 Далее я начинаю рабоать с Redash. При первом заходе по ip localhost:5000 мне выдавало ошибку
 "Internal Server Error"
