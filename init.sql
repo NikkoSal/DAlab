@@ -11,3 +11,7 @@ CREATE TABLE IF NOT EXISTS rides (
     price DECIMAL(7,2) NOT NULL,
     rating TINYINT NOT NULL
 );
+
+CREATE USER IF NOT EXISTS 'redash'@'%' IDENTIFIED WITH mysql_native_password BY 'redash';
+GRANT ALL PRIVILEGES ON taxi.* TO 'redash'@'%';
+FLUSH PRIVILEGES;

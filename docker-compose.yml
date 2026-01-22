@@ -2,6 +2,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: 12782234
       MYSQL_DATABASE: taxi
@@ -54,6 +55,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - mysql
     environment:
       REDASH_DATABASE_URL: postgres://redash:redash@postgres:5432/redash
       REDASH_REDIS_URL: redis://redis:6379/0
@@ -66,7 +68,7 @@ services:
       - analytics_net
 
   redash-scheduler:
-    image: redash/redash:latest
+    image: redash/redash:10.1.0.b50633
     container_name: redash_scheduler
     depends_on:
       - redash-server
@@ -74,12 +76,13 @@ services:
       REDASH_DATABASE_URL: postgres://redash:redash@postgres:5432/redash
       REDASH_REDIS_URL: redis://redis:6379/0
       REDASH_SECRET_KEY: supersecretkey
+      REDASH_COOKIE_SECRET: 12345
     command: scheduler
     networks:
       - analytics_net
 
   redash-worker:
-    image: redash/redash:latest
+    image: redash/redash:10.1.0.b50633
     container_name: redash_worker
     depends_on:
       - redash-server
@@ -87,6 +90,7 @@ services:
       REDASH_DATABASE_URL: postgres://redash:redash@postgres:5432/redash
       REDASH_REDIS_URL: redis://redis:6379/0
       REDASH_SECRET_KEY: supersecretkey
+      REDASH_COOKIE_SECRET: 12345
     command: worker
     networks:
       - analytics_net
